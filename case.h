@@ -46,6 +46,7 @@ public :
    char afficher() override ;
 
 };
+#endif
 
 
 

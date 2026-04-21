@@ -1,5 +1,6 @@
 #include  "case.h"
 
+
 char Mur::afficher(){
     return '#';
 }
@@ -7,7 +8,7 @@ char Passage::afficher(){
     return ' ';
 }
 char Tresor::afficher(){
-   return ' + ';
+   return '+';
 }
 char Monstre::afficher() {
     return 'M';
