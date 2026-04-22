@@ -13,7 +13,11 @@ private:
 
 public:
     void generer(int largeur, int hauteur);// definir  la fonction  pour la maps combien la hauteur et largeur 
-    void afficher();// pour chaque valleur dans la martice  
+    void afficher(int px, int py);// pour chaque valleur dans la martice  
+Case* getCase(int x, int y );
+int getLargeur();
+int getHauter();
+  
 };
 
 #endif

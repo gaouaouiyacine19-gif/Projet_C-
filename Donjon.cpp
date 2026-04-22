@@ -29,10 +29,25 @@ void Donjon::generer(int largeur, int hauteur) {
     // Ajouter un trésor au centre
     maps[hauteur/2][largeur/2] = CaseFactory::creeCase(TRESOR);
 }
-void Donjon::afficher() {
-    for (auto& ligne : maps ) {// pour chauqe linge de la maps 
-        for (auto& c : ligne) {// pour chaque case 
-            cout << c->afficher();
+Case* Donjon::getCase(int x, int y ){
+    return maps[y][x];// dans cette case y quoi 
+
+}
+int Donjon::getLargeur() {
+    return maps[0].size();// combien de colone y a
+}
+int Donjon::getHauter() {
+    return maps.size();// cobien de ligne y a 
+}
+void Donjon::afficher(int px , int py ) {
+    for ( int i = 0; i< maps.size(); i++ ) {// pour chauqe linge de la maps 
+        for (int j = 0; j < maps[i].size(); j++) {
+        
+            if (i == py && j == px) {
+                cout << '@';
+            } else {
+                cout << maps[i][j]->afficher();
+            }
         }
         cout << endl;
     }

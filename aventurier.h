@@ -1,5 +1,6 @@
 #ifndef AVENTURIER_H
 #define AVENTURIER_H
+#include "Donjon.h"
 
 
 class Aventurier {
@@ -10,7 +11,9 @@ private:
 public:
    Aventurier(int startx, int starty);
 
-   void deplacer(int dx , int dy);
+   void deplacer(int dx , int dy , Donjon& d);
+   int getX() const;
+   int getY() const;
    void afficherPosition();
 
 };
