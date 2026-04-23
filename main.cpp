@@ -10,7 +10,8 @@ int main() {
    char cmd;
    while(true){
     d.afficher(a.getX(), a.getY());
-    cout << "Entrez une commande (z/q/s/d pour se déplacer, x pour quitter): ";
+    a.afficherPosition();
+    cout << "Entrez une commande (z ou q ou s ou d) pour se deplacer, x pour quitter: ";
     cin >> cmd;
 
     if (cmd == 'x') {
@@ -29,7 +30,8 @@ int main() {
             cout << "Commande invalide!" << endl;
             continue;
         }
+        
     }
-
+         
     return 0;
 }
