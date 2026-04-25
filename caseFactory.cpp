@@ -21,6 +21,9 @@ switch(type){
     case MONSTRE :
      return new Monstre();
 
+     case SORTIE :
+     return new Sortie();
+
 
     default:
      return nullptr;

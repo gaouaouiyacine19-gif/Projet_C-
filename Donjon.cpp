@@ -6,6 +6,7 @@ using namespace std;
 
 void Donjon::generer(int largeur, int hauteur) {
     maps.resize(hauteur, vector<Case*>(largeur));
+ 
 
     for (int i = 0; i < hauteur; i++) {
         for (int j = 0; j < largeur; j++) {
@@ -28,6 +29,11 @@ void Donjon::generer(int largeur, int hauteur) {
 
     // Ajouter un trésor au centre
     maps[hauteur/2][largeur/2] = CaseFactory::creeCase(TRESOR);
+
+    maps[1][1] = CaseFactory::creeCase(PASSAGE); // entrée
+    maps[hauteur-2][largeur-1] = CaseFactory::creeCase(SORTIE); // sortie
+
+    
 }
 Case* Donjon::getCase(int x, int y ){
     return maps[y][x];// dans cette case y quoi 

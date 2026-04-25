@@ -8,7 +8,8 @@ enum TypeCase{
     PASSAGE,
     TRESOR,
     MONSTRE,
-    PIEGE 
+    PIEGE,
+    SORTIE
 };
 class CaseFactory{
 public :

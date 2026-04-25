@@ -13,7 +13,9 @@ char Tresor::afficher(){
 char Monstre::afficher() {
     return 'M';
 }
-
 char Piege::afficher() {
     return 'T';
+}
+char Sortie::afficher() {
+    return 'S';
 }

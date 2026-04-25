@@ -16,6 +16,11 @@ int main() {
     srand(time(0));
     cout << "Entrez une commande (z ou q ou s ou d) pour se deplacer, x pour quitter: ";
     cin >> cmd;
+    Case* c = d.getCase(a.getX(), a.getY());
+    if (c->afficher() == 'S') {
+        cout << "Félicitations ! Vous avez trouvé la sortie !" << endl;
+        break;
+    }
 
     if (cmd == 'x') {
         break;
@@ -33,6 +38,7 @@ int main() {
             cout << "Commande invalide!" << endl;
             continue;
         }
+
         
     }
          

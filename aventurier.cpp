@@ -39,12 +39,19 @@ void Aventurier::deplacer(int dx , int dy, Donjon& d){
               return;
         }
     } 
-    else if (c->afficher() == 'P') {
-        vie -= 30;
+        else if (c->afficher() == 'P') {
+          vie -= 30;
     } 
-    else if (c->afficher() == 'T') {
-        tresor++;
+         else if (c->afficher() == 'T') {
+          tresor++;
     }
+         else if (c->afficher() == 'S') {
+          cout << "Félicitations ! Vous avez trouvé la sortie !" << endl;
+          score += 100;
+
+
+    }
+
     x=nx;
     y=ny;
 }
