@@ -16,6 +16,8 @@ int main() {
     char cmd;
 
     while (a.estVivant() && !a.aGagne()) {
+        system("cls");
+        //system("clear");// ines pour toi fais ça 
         d.afficher(a.getX(), a.getY());
         a.afficherPosition();
 
