@@ -9,7 +9,8 @@ enum TypeCase{
     TRESOR,
     MONSTRE,
     PIEGE,
-    SORTIE
+    SORTIE,
+    ENTREE
 };
 class CaseFactory{
 public :

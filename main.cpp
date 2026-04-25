@@ -8,7 +8,7 @@ int main() {
    
     d.generer(20, 10);
 
-   Aventurier a(3, 2);
+   Aventurier a(0, 1);
    char cmd;
    while(true){
     d.afficher(a.getX(), a.getY());

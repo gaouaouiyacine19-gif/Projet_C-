@@ -19,3 +19,6 @@ char Piege::afficher() {
 char Sortie::afficher() {
     return 'S';
 }
+char Entree::afficher(){
+    return 'E';
+}

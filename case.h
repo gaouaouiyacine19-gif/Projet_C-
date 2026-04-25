@@ -51,6 +51,11 @@ public :
    char afficher() override ;
 
 };
+class Entree  : public Case {
+public : 
+   char afficher() override ;
+
+};
 
 #endif
 

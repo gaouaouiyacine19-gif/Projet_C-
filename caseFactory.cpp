@@ -23,6 +23,8 @@ switch(type){
 
      case SORTIE :
      return new Sortie();
+     case ENTREE : 
+      return new Entree();
 
 
     default:
