@@ -1,5 +1,7 @@
 #include "Donjon.h"
 #include "aventurier.h"
+#include <cstdlib>
+#include <ctime>
 
 int main() {
     Donjon d;
@@ -11,6 +13,7 @@ int main() {
    while(true){
     d.afficher(a.getX(), a.getY());
     a.afficherPosition();
+    srand(time(0));
     cout << "Entrez une commande (z ou q ou s ou d) pour se deplacer, x pour quitter: ";
     cin >> cmd;
 

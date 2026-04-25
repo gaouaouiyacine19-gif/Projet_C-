@@ -16,7 +16,7 @@ public:
     void afficher(int px, int py);// pour chaque valleur dans la martice  
 Case* getCase(int x, int y );
 int getLargeur();
-int getHauter();
+int getHauteur();
   
 };
 

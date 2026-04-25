@@ -36,7 +36,7 @@ Case* Donjon::getCase(int x, int y ){
 int Donjon::getLargeur() {
     return maps[0].size();// combien de colone y a
 }
-int Donjon::getHauter() {
+int Donjon::getHauteur() {
     return maps.size();// cobien de ligne y a 
 }
 void Donjon::afficher(int px , int py ) {
