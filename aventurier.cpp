@@ -11,6 +11,7 @@ Aventurier::Aventurier(int startx, int starty){
     vie=100;
     score=0;
     tresor=0;
+    gagne = false;
 }
 
 void Aventurier::deplacer(int dx , int dy, Donjon& d){
@@ -48,6 +49,7 @@ void Aventurier::deplacer(int dx , int dy, Donjon& d){
          else if (c->afficher() == 'S') {
           cout << "Félicitations ! Vous avez trouvé la sortie !" << endl;
           score += 100;
+          gagne = true;
 
 
     }
@@ -55,6 +57,13 @@ void Aventurier::deplacer(int dx , int dy, Donjon& d){
     x=nx;
     y=ny;
 }
+bool Aventurier::estVivant() const {
+    return vie > 0;
+}
+bool Aventurier::aGagne() const {
+    return gagne;
+}
+
 int Aventurier:: getX() const {return x; }
 int Aventurier:: getY() const {return y; }  
 

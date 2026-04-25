@@ -10,6 +10,8 @@ private:
     int vie;
     int score;
     int tresor;
+    bool gagne;
+
 public:
    Aventurier(int startx, int starty);
 
@@ -18,6 +20,8 @@ public:
    int getX() const;
    int getY() const;
    void afficherPosition();
+   bool estVivant() const;
+   bool aGagne() const ;
 
 };
 
