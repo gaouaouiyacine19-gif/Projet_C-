@@ -29,13 +29,15 @@ void Donjon::generer(int largeur, int hauteur) {
       // maps[i][largeur-2]=CaseFactory::creeCase(PASSAGE);
 
     //}
+    // la cest pour crée un chemein de sotrie qui vreable a chaque fois 
+
     int d =1;
     int r= 1;
     while (d < hauteur - 1 && r < largeur-1 ){
         
 
         if (d==hauteur-2){
-            for (int i=r; i<largeur-2; i++){
+            for (int i=r; i<largeur-1; i++){
                 maps[d][i]=CaseFactory::creeCase(PASSAGE);
 
         }
