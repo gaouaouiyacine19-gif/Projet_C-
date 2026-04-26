@@ -10,7 +10,7 @@ int main() {
     srand(time(0)); // une seule fois au début
 
     Donjon d;
-    d.generer(20, 10);
+    d.generer(10, 20);
 
     Aventurier a(0, 1);
     char cmd;

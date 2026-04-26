@@ -10,27 +10,74 @@ void Donjon::generer(int largeur, int hauteur) {
 
     for (int i = 0; i < hauteur; i++) {
         for (int j = 0; j < largeur; j++) {
-            if (i == 0 || i == hauteur - 1 || j == 0 || j == largeur - 1) {
-                maps[i][j] = CaseFactory::creeCase(MUR) ;
-            } 
-            else {
-                maps[i][j] = CaseFactory::creeCase(PASSAGE);
-                
-            }
-            if(i==3 & j==4){
-                 maps[i][j] =CaseFactory::creeCase(PIEGE);
-            }
-            if(i==5 & j==3){
-                 maps[i][j] =CaseFactory::creeCase(MONSTRE);
-            }
+            maps[i][j] = CaseFactory::creeCase(MUR) ;
 
+
+            //if (i == 0 || i == hauteur - 1 || j == 0 || j == largeur - 1) {
+                // maps[i][j] = CaseFactory::creeCase(MUR) ;} 
+            
+            
+             //maps[i][j] = CaseFactory::creeCase(PASSAGE);
+                
         }
     }
+    
+    //for (int i=1; i<largeur-2; i++){
+       //maps[1][i]=CaseFactory::creeCase(PASSAGE);
+    //}
+     //for (int i=1; i<hauteur-1; i++){
+      // maps[i][largeur-2]=CaseFactory::creeCase(PASSAGE);
+
+    //}
+    int d =1;
+    int r= 1;
+    while (d < hauteur - 1 && r < largeur-1 ){
+        
+
+        if (d==hauteur-2){
+            for (int i=r; i<largeur-2; i++){
+                maps[d][i]=CaseFactory::creeCase(PASSAGE);
+
+        }
+        break;
+    }
+       else if(r==largeur-2){
+         for (int i=d; i<hauteur-1; i++){
+           maps[i][r]=CaseFactory::creeCase(PASSAGE);
+
+        } 
+        break;
+    }
+        int dr = std::rand() % (2); // 0 ou 1 d r down or right 
+        if(dr ==0){
+            if(d < hauteur-2){
+                 d++;
+                 maps[d][r]=CaseFactory::creeCase(PASSAGE);
+             }
+         
+
+        }
+        if(dr ==1 ){
+            if(r < largeur-2){
+                 r++;
+            maps[d][r]=CaseFactory::creeCase(PASSAGE);
+                
+
+            }
+            
+        }
+
+
+    }
+
 
     // Ajouter un trésor au centre
     maps[hauteur/2][largeur/2] = CaseFactory::creeCase(TRESOR);
 
-    maps[1][0] = CaseFactory::creeCase(ENTREE); // entrée
+
+    maps[1][0] = CaseFactory::creeCase(ENTREE); 
+    maps[1][1] = CaseFactory::creeCase(PASSAGE);// entrée
+
     maps[hauteur-2][largeur-1] = CaseFactory::creeCase(SORTIE); // sortie
 
     
