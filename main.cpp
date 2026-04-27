@@ -10,10 +10,11 @@ int main() {
     srand(time(0)); // une seule fois au début
 
     Donjon d;
-    d.generer(40, 20);
+    d.generer(20, 20);
 
     Aventurier a(0, 1);
     char cmd;
+
 
     while (a.estVivant() && !a.aGagne()) {
         system("cls");

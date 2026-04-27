@@ -30,7 +30,7 @@ void Donjon::generer(int largeur, int hauteur) {
 
     //}
     // la cest pour crée un chemein de sotrie qui vreable a chaque fois 
-
+    
     int d =1;
     int r= 1;
     while (d < hauteur - 1 && r < largeur-1 ){
@@ -39,6 +39,7 @@ void Donjon::generer(int largeur, int hauteur) {
         if (d==hauteur-2){
             for (int i=r; i<largeur-1; i++){
                 maps[d][i]=CaseFactory::creeCase(PASSAGE);
+                passages.push_back({d, i});
 
         }
         break;
@@ -46,6 +47,7 @@ void Donjon::generer(int largeur, int hauteur) {
        else if(r==largeur-2){
          for (int i=d; i<hauteur-1; i++){
            maps[i][r]=CaseFactory::creeCase(PASSAGE);
+           passages.push_back({i, d});
 
         } 
         break;
@@ -55,6 +57,7 @@ void Donjon::generer(int largeur, int hauteur) {
             if(d < hauteur-2){
                  d++;
                  maps[d][r]=CaseFactory::creeCase(PASSAGE);
+                 passages.push_back({d, r});
              }
          
 
@@ -62,7 +65,8 @@ void Donjon::generer(int largeur, int hauteur) {
         if(dr ==1 ){
             if(r < largeur-2){
                  r++;
-            maps[d][r]=CaseFactory::creeCase(PASSAGE);
+                 maps[d][r]=CaseFactory::creeCase(PASSAGE);
+                 passages.push_back({d, r});
                 
 
             }
@@ -79,11 +83,73 @@ void Donjon::generer(int largeur, int hauteur) {
 
     maps[1][0] = CaseFactory::creeCase(ENTREE); 
     maps[1][1] = CaseFactory::creeCase(PASSAGE);// entrée
-
     maps[hauteur-2][largeur-1] = CaseFactory::creeCase(SORTIE); // sortie
+// crée les passage aleatoire 
+for(int i =0 ; i<10;i++){
+    int index = rand() % passages.size();
+    Position p = passages[index];
+        int l=p.d;
+        int c=p.r;
+        int choix = rand()%2;
+  
 
-    
+  
+        for(int j = 0 ; j<10 ;j++){
+        int proch = rand() % 4;
+        if (proch ==0 ) {
+            c++;
+            if(l==hauteur-1 || c==largeur-1){
+                c--;
+            }
+            else{
+
+                maps[l][c] = CaseFactory::creeCase(PASSAGE);
+                passages.push_back({l, c});
+
+            }
+            
+
+       }
+        if (proch ==1 ) {
+            l++;
+             if(l==hauteur-1 || c==largeur-1){
+                l--;
+            }
+            else {
+                maps[l][c] = CaseFactory::creeCase(PASSAGE);
+                passages.push_back({l, c});
+            }
+
+       }
+        if (proch ==2 ) {
+            c--;
+             if(l==hauteur-1 || c==largeur-1){
+                c++;
+            }
+           else {
+            maps[l][c] = CaseFactory::creeCase(PASSAGE);
+             passages.push_back({l, c});
+            } 
+            
+
+       } if (proch ==3 ) {
+           l--;
+          if(l==hauteur-1 || c==largeur-1){
+                l++;
+             }
+          else {
+            maps[l][c] = CaseFactory::creeCase(PASSAGE);
+            passages.push_back({l, c});
+            } 
+
+       }
+
+    }
+
 }
+}  
+    
+
 Case* Donjon::getCase(int x, int y ){
     return maps[y][x];// dans cette case y quoi 
 
@@ -101,7 +167,7 @@ void Donjon::afficher(int px , int py ) {
             if (i == py && j == px) {
                 cout << '@';
             } else {
-                cout << maps[i][j]->afficher();
+                cout << maps[i][j]->afficher() <<" ";
             }
         }
         cout << endl;
