@@ -7,148 +7,72 @@ using namespace std;
 void Donjon::generer(int largeur, int hauteur) {
     maps.resize(hauteur, vector<Case*>(largeur));
  
-
+    // remplir les murs 
     for (int i = 0; i < hauteur; i++) {
         for (int j = 0; j < largeur; j++) {
             maps[i][j] = CaseFactory::creeCase(MUR) ;
-
-
-            //if (i == 0 || i == hauteur - 1 || j == 0 || j == largeur - 1) {
-                // maps[i][j] = CaseFactory::creeCase(MUR) ;} 
-            
-            
-             //maps[i][j] = CaseFactory::creeCase(PASSAGE);
-                
-        }
-    }
-    
-    //for (int i=1; i<largeur-2; i++){
-       //maps[1][i]=CaseFactory::creeCase(PASSAGE);
-    //}
-     //for (int i=1; i<hauteur-1; i++){
-      // maps[i][largeur-2]=CaseFactory::creeCase(PASSAGE);
-
-    //}
-    // la cest pour crée un chemein de sotrie qui vreable a chaque fois 
-    
-    int d =1;
-    int r= 1;
-    while (d < hauteur - 1 && r < largeur-1 ){
         
-
-        if (d==hauteur-2){
-            for (int i=r; i<largeur-1; i++){
-                maps[d][i]=CaseFactory::creeCase(PASSAGE);
-                passages.push_back({d, i});
-
-        }
-        break;
-    }
-       else if(r==largeur-2){
-         for (int i=d; i<hauteur-1; i++){
-           maps[i][r]=CaseFactory::creeCase(PASSAGE);
-           passages.push_back({i, d});
-
-        } 
-        break;
-    }
-        int dr = std::rand() % (2); // 0 ou 1 d r down or right 
-        if(dr ==0){
-            if(d < hauteur-2){
-                 d++;
-                 maps[d][r]=CaseFactory::creeCase(PASSAGE);
-                 passages.push_back({d, r});
-             }
-         
-
-        }
-        if(dr ==1 ){
-            if(r < largeur-2){
-                 r++;
-                 maps[d][r]=CaseFactory::creeCase(PASSAGE);
-                 passages.push_back({d, r});
                 
-
-            }
-            
         }
-
-
     }
+     // initialiser le tableau visite
+    visite.assign(hauteur, vector<bool>(largeur, false));
 
-
-    // Ajouter un trésor au centre
+    // lancer le recursive backtracking
+    genererRecursif(1, 1);
+    // placer entrée, sortie, trésor
+    maps[1][0] = CaseFactory::creeCase(ENTREE);
+    maps[1][1] = CaseFactory::creeCase(PASSAGE);
+    maps[hauteur-2][largeur-2] = CaseFactory::creeCase(PASSAGE);
+    maps[hauteur-3][largeur-2] = CaseFactory::creeCase(PASSAGE);
+    maps[hauteur-2][largeur-1] = CaseFactory::creeCase(SORTIE);
     maps[hauteur/2][largeur/2] = CaseFactory::creeCase(TRESOR);
 
+}
+void Donjon::genererRecursif(int x, int y) {
+    // on marque la case actuelle comme visitée
+    visite[y][x] = true;
 
-    maps[1][0] = CaseFactory::creeCase(ENTREE); 
-    maps[1][1] = CaseFactory::creeCase(PASSAGE);// entrée
-    maps[hauteur-2][largeur-1] = CaseFactory::creeCase(SORTIE); // sortie
-// crée les passage aleatoire 
-for(int i =0 ; i<10;i++){
-    int index = rand() % passages.size();
-    Position p = passages[index];
-        int l=p.d;
-        int c=p.r;
-        int choix = rand()%2;
-  
+    // les 4 directions : haut, bas, gauche, droite
+    // on avance de 2 cases donc dx et dy valent 2 ou -2
+    int dx[] = {0, 0, -2, 2};
+    int dy[] = {-2, 2, 0, 0};
 
-  
-        for(int j = 0 ; j<10 ;j++){
-        int proch = rand() % 4;
-        if (proch ==0 ) {
-            c++;
-            if(l==hauteur-1 || c==largeur-1){
-                c--;
-            }
-            else{
-
-                maps[l][c] = CaseFactory::creeCase(PASSAGE);
-                passages.push_back({l, c});
-
-            }
-            
-
-       }
-        if (proch ==1 ) {
-            l++;
-             if(l==hauteur-1 || c==largeur-1){
-                l--;
-            }
-            else {
-                maps[l][c] = CaseFactory::creeCase(PASSAGE);
-                passages.push_back({l, c});
-            }
-
-       }
-        if (proch ==2 ) {
-            c--;
-             if(l==hauteur-1 || c==largeur-1){
-                c++;
-            }
-           else {
-            maps[l][c] = CaseFactory::creeCase(PASSAGE);
-             passages.push_back({l, c});
-            } 
-            
-
-       } if (proch ==3 ) {
-           l--;
-          if(l==hauteur-1 || c==largeur-1){
-                l++;
-             }
-          else {
-            maps[l][c] = CaseFactory::creeCase(PASSAGE);
-            passages.push_back({l, c});
-            } 
-
-       }
-
+    // mélanger les directions aléatoirement
+    int ordre[] = {0, 1, 2, 3};
+    for (int i = 3; i > 0; i--) {
+        int j = rand() % (i + 1);
+        swap(ordre[i], ordre[j]);
     }
 
+    // on essaie chaque direction
+    for (int i = 0; i < 4; i++) {
+        // la case voisine 2 cases plus loin
+        int nx = x + dx[ordre[i]];
+        int ny = y + dy[ordre[i]];
+
+        // on avance seulement si :
+        // - on est dans la grille (sans toucher les bords)
+        // - la case n'est pas déjà visitée
+        if (nx > 0 && nx < getLargeur()-1 &&
+            ny > 0 && ny < getHauteur()-1 &&
+            !visite[ny][nx]) {
+
+            // casser le mur du milieu
+            int mx = x + dx[ordre[i]]/2;
+            int my = y + dy[ordre[i]]/2;
+            maps[my][mx] = CaseFactory::creeCase(PASSAGE);
+
+            // creuser la case d'arrivée
+            maps[ny][nx] = CaseFactory::creeCase(PASSAGE);
+
+            // appel récursif — on continue depuis la nouvelle case
+            genererRecursif(nx, ny);
+        }
+    }
+    // si aucune direction disponible → backtrack automatique
+    // C++ remonte tout seul à l'appel précédent
 }
-}  
-    
 
 Case* Donjon::getCase(int x, int y ){
     return maps[y][x];// dans cette case y quoi 
@@ -172,4 +96,6 @@ void Donjon::afficher(int px , int py ) {
         }
         cout << endl;
     }
+
+
 }

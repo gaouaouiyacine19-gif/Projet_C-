@@ -1,4 +1,5 @@
 #include "aventurier.h"
+#include "caseFactory.h"
 #include <iostream>
 using namespace std;
 
@@ -29,7 +30,7 @@ void Aventurier::deplacer(int dx , int dy, Donjon& d){
     } 
     else if (c->afficher() == 'M') {
         char choix;
-        cout<< " do you went to fight the monster ? (y/n) ";
+        cout<< " do you want to fight the monster ? (y/n) ";
         cin>> choix;
         if (choix == 'y') {
             int nombre = std::rand() % (71)+ 30; // 30-100
@@ -40,11 +41,12 @@ void Aventurier::deplacer(int dx , int dy, Donjon& d){
               return;
         }
     } 
-        else if (c->afficher() == 'P') {
+        else if (c->afficher() == 'T') {
           vie -= 30;
     } 
-         else if (c->afficher() == 'T') {
+         else if (c->afficher() == '+') {
           tresor++;
+          d.setCase(nx, ny, CaseFactory::creeCase(PASSAGE));
     }
          else if (c->afficher() == 'S') {
           cout << "Félicitations ! Vous avez trouvé la sortie !" << endl;
