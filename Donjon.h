@@ -5,6 +5,8 @@
 #include "case.h"
 using namespace std ;
 
+
+
 struct Position {
     int d;
     int r;
@@ -19,11 +21,12 @@ public:
     void setCase(int x, int y, Case* c); // remplace une case dans la grille
     void generer(int largeur, int hauteur);// definir  la fonction  pour la maps combien la hauteur et largeur 
     void afficher(int px, int py);// pour chaque valleur dans la martice  
-     void genererRecursif(int x, int y); 
+    void genererRecursif(int x, int y); 
     // fonction qui creuse les chemins du labyrinthe en partant de (x,y)
     // avance de 2 cases à la fois et casse le mur du milieu
     // s'appelle elle même récursivement jusqu'à avoir visité toutes les cases
-  
+    vector<Position> trouverChemin(int startX, int startY); // on prend la position de l'aventurier et retourne la liste des cases du chemin
+    void afficherAvecChemin(vector<Position> chemin, int px, int py); //affiche la grille avec le chemin marqué en ...
 Case* getCase(int x, int y );
 int getLargeur();
 int getHauteur();

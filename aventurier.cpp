@@ -9,7 +9,7 @@ using namespace std;
 Aventurier::Aventurier(int startx, int starty){
     x=startx;
     y=starty;
-    vie=100;
+    vie=200;
     score=0;
     tresor=0;
     gagne = false;
@@ -17,7 +17,7 @@ Aventurier::Aventurier(int startx, int starty){
 
 void Aventurier::deplacer(int dx , int dy, Donjon& d){
 
-   int nx = x + dx;
+    int nx = x + dx;
     int ny = y + dy;
     // Check if the new position is valid
     if (nx <  0  || nx >= d.getLargeur() || ny < 0 || ny >= d.getHauteur()) {
@@ -30,24 +30,27 @@ void Aventurier::deplacer(int dx , int dy, Donjon& d){
     } 
     else if (c->afficher() == 'M') {
         char choix;
-        cout<< " do you want to fight the monster ? (y/n) ";
-        cin>> choix;
+        cout << "do you want to fight the monster ? (y/n) ";
+        cin >> choix;
         if (choix == 'y') {
-            int nombre = std::rand() % (71)+ 30; // 30-100
-            vie-= nombre;
+            int nombre = std::rand() % 21 + 10;
+            vie -= nombre;
         }
-        if (choix =='n'){
-            cout<<"tu fuit le monstre"<<endl;
-              return;
+        if (choix == 'n') {
+            cout << "tu fuis le monstre" << endl;
         }
+        // dans tous les cas le monstre disparaît
+        d.setCase(nx, ny, CaseFactory::creeCase(PASSAGE));
     } 
         else if (c->afficher() == 'T') {
-          vie -= 30;
+          vie -= 10;
     } 
          else if (c->afficher() == '+') {
           tresor++;
           d.setCase(nx, ny, CaseFactory::creeCase(PASSAGE));
     }
+
+        
          else if (c->afficher() == 'S') {
           cout << "Félicitations ! Vous avez trouvé la sortie !" << endl;
           score += 100;
