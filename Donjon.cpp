@@ -41,8 +41,8 @@ void Donjon::generer(int largeur, int hauteur) {
     // placer entrée, sortie, trésor
     maps[1][0] = CaseFactory::creeCase(ENTREE);
     maps[1][1] = CaseFactory::creeCase(PASSAGE);
-    maps[hauteur-2][largeur-2] = CaseFactory::creeCase(PASSAGE);
-    maps[hauteur-3][largeur-2] = CaseFactory::creeCase(PASSAGE);
+    
+    
     maps[hauteur-2][largeur-1] = CaseFactory::creeCase(SORTIE);
 
 
